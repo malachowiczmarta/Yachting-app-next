@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+interface BaseLayoutProps {
+  children: React.ReactNode;
+}
+
 const TopNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -117,7 +121,7 @@ const Footer = () => (
   </footer>
 );
 
-export default function BaseLayout({ children }) {
+export default function BaseLayout({ children }: BaseLayoutProps) {
   return (
     <>
       <TopNavigation />

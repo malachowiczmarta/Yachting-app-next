@@ -9,15 +9,15 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "airtable": "^0.10.1",
-    "autoprefixer": "^10.2.5",
-    "eslint": "^7.20.0",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@next/font": "13.1.2",
     "@types/node": "^18.11.18",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
+    "airtable": "^0.10.1",
+    "autoprefixer": "^10.2.5",
+    "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",

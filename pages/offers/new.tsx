@@ -1,16 +1,25 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import BaseLayout from 'components/BaseLayout';
 import { useRouter } from 'next/router';
+// import { useSession } from 'next-auth/client';
 
 export default function OfferNew() {
   const offerForm = useRef<HTMLFormElement>(null);
+  const [error, setError] = useState(null);
   const [formProcessing, setFormProcessing] = useState(false);
   const router = useRouter();
+  // const [session, loading] = useSession();
+
+  // useEffect(() => {
+  //   if (!session && !loading) {
+  //     router.push('/user/signin');
+  //   }
+  // }, [session, loading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formProcessing) return;
-
+    setError(null);
     setFormProcessing(true);
     const form = new FormData(offerForm.current as HTMLFormElement);
     const payload = {
@@ -22,7 +31,7 @@ export default function OfferNew() {
       location: form.get('location')
     };
 
-    await fetch('/api/offers', {
+    const response = await fetch('/api/offers', {
       method: 'POST',
       body: JSON.stringify(payload),
       headers: {
@@ -30,8 +39,24 @@ export default function OfferNew() {
       }
     });
 
-    router.push('/offers/thanks');
+    try {
+      if (response.ok) {
+        router.push('/offers/thanks');
+      }
+    } catch {
+      const payload = await response.json();
+      setFormProcessing(false);
+      setError(payload.error?.details[0]?.message);
+    }
   };
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (!loading && !session) {
+  //   return <div>Redirecting...</div>;
+  // }
 
   return (
     <BaseLayout>
@@ -138,6 +163,13 @@ export default function OfferNew() {
                 >
                   {formProcessing ? 'Please wait...' : 'Submit offer'}
                 </button>
+                {error && (
+                  <div className="flex justify-center w-full my-5">
+                    <span className="bg-red-600 w-full rounded text-white px-3 py-3 text-center">
+                      Offer not added: {error}
+                    </span>
+                  </div>
+                )}
               </div>
             </form>
           </div>

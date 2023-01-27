@@ -19,10 +19,20 @@ export default async (req: Req, res: Res) => {
       break;
     }
     case 'POST': {
-      const payload = req.body;
-      console.log('payload on backend', payload);
-      const offer = await createOffer(payload);
-      res.status(200).json({ status: 'created', offer });
+      try {
+        // const session = await getSession({ req });
+        // if (!session) {
+        //   return res.status(401).json({ error: 'not_authorized' });
+        // }
+
+        const payload = req.body;
+        // const userId = session.user.id;
+        const userId = '123';
+        const offer = await createOffer(payload, userId);
+        res.status(200).json({ status: 'created', offer });
+      } catch (error) {
+        res.status(422).json({ status: 'not_created', error });
+      }
 
       break;
     }

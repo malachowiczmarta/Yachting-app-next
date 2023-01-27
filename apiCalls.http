@@ -1,0 +1,22 @@
+POST http://localhost:3000/api/offers
+content-type: application/json
+
+{
+  "title": "Super fast boat",
+  "mobile": "12312321",
+  "category": "sale",
+  "description": "New boat",
+  "location": "Szczecin/PL",
+  "price": "123"
+}
+
+###
+
+POST http://localhost:3000/api/users
+content-type: application/json
+
+{
+  "email": "john@doe.com",
+  "password": "12312321",
+  "fullName": "John Doe"
+}

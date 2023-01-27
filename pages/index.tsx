@@ -15,11 +15,15 @@ export const getStaticProps = async () => {
   };
 };
 
-interface IOffer {
+export interface IOffer {
   id: number;
   title: string;
   category: string;
   description: string;
+  mobile: string;
+  email: string;
+  price: number;
+  location: string;
 }
 
 interface HomeProps {

@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 import { IOffer } from '..';
 
 interface IParams {
-  id: number;
+  id: string;
 }
 
 export const getStaticPaths = async () => {
-  const offers = await getRecentOffers(2);
+  const offers = await getRecentOffers(4);
 
   return {
     paths: offers.map((offer) => ({ params: { id: String(offer.id) } })),

@@ -1,6 +1,6 @@
 import airDB from 'services/airtableClient';
 
-const get = async (id: number) => {
+const get = async (id: string) => {
   const offers = await airDB('offers')
     .select({
       filterByFormula: `id = ${id}`

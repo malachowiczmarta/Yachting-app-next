@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
 };
 
 export interface IOffer {
-  id: number;
+  id: string;
   title: string;
   category: string;
   description: string;

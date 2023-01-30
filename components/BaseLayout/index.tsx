@@ -1,5 +1,7 @@
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 interface BaseLayoutProps {
   children: React.ReactNode;
@@ -7,6 +9,8 @@ interface BaseLayoutProps {
 
 const TopNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session, status } = useSession();
+  console.log(`session`, session);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -30,7 +34,12 @@ const TopNavigation = () => {
       >
         Menu
       </button>
-      <div id="navigation">
+      <div
+        className={classNames('top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto', {
+          hidden: !isOpen
+        })}
+        id="navigation"
+      >
         <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
           <Link
             href="/offers/new"
@@ -39,6 +48,23 @@ const TopNavigation = () => {
             <span>Submit offer</span>
           </Link>
         </div>
+        {session && (
+          <a
+            // onClick={signOut}
+            className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+          >
+            <span>Logout</span>
+          </a>
+        )}
+
+        {!session && status !== 'loading' && (
+          <Link
+            href="/user/signin"
+            className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+          >
+            <span>Sign in</span>
+          </Link>
+        )}
       </div>
     </nav>
   );

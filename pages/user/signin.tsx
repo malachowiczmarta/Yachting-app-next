@@ -1,27 +1,27 @@
 import { useRef, useState } from 'react';
 import BaseLayout from 'components/BaseLayout';
 import { useRouter } from 'next/router';
-import { signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 
 export default function SignIn() {
-  const loginForm = useRef();
-  const [error, setError] = useState();
+  const loginForm = useRef<HTMLFormElement>(null);
+  const [error, setError] = useState('');
   const [formProcessing, setFormProcessing] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formProcessing) return;
-    setError(null);
+    setError('');
     setFormProcessing(true);
-    const form = new FormData(loginForm.current);
-    const { ok } = await signIn('credentials', {
+    const form = new FormData(loginForm.current as HTMLFormElement);
+    const resp = await signIn('credentials', {
       redirect: false,
       email: form.get('email'),
       password: form.get('password')
     });
 
-    if (ok) {
+    if (resp?.ok) {
       router.push('/');
     } else {
       setError('Not authorized. Try again.');

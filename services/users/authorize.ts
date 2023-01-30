@@ -1,13 +1,14 @@
 import airDB from 'services/airtableClient';
 import Joi from 'joi';
 import crypto from 'crypto';
+import { IPayload } from './create';
 
 const schema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required()
 });
 
-const authorize = async (payload) => {
+const authorize = async (payload: IPayload) => {
   const { email, password } = await schema.validateAsync(payload);
 
   const [user] = await airDB('users')

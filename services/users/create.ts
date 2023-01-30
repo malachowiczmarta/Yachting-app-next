@@ -2,10 +2,10 @@ import airDB from 'services/airtableClient';
 import Joi from 'joi';
 import crypto from 'crypto';
 
-interface IPayload {
-  email: string;
-  fullName: string;
-  password: string;
+export interface IPayload {
+  email: string | undefined;
+  fullName?: string | undefined;
+  password: string | undefined;
 }
 
 const schema = Joi.object({

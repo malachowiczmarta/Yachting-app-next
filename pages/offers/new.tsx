@@ -1,20 +1,20 @@
 import { useRef, useState, useEffect } from 'react';
 import BaseLayout from 'components/BaseLayout';
 import { useRouter } from 'next/router';
-// import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 
 export default function OfferNew() {
   const offerForm = useRef<HTMLFormElement>(null);
   const [error, setError] = useState(null);
   const [formProcessing, setFormProcessing] = useState(false);
   const router = useRouter();
-  // const [session, loading] = useSession();
+  const { data: session, status } = useSession();
 
-  // useEffect(() => {
-  //   if (!session && !loading) {
-  //     router.push('/user/signin');
-  //   }
-  // }, [session, loading]);
+  useEffect(() => {
+    if (!session && status !== 'loading') {
+      router.push('/user/signin');
+    }
+  }, [session, status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,13 +50,10 @@ export default function OfferNew() {
     }
   };
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
-  // if (!loading && !session) {
-  //   return <div>Redirecting...</div>;
-  // }
 
   return (
     <BaseLayout>
@@ -80,8 +77,7 @@ export default function OfferNew() {
                   <select
                     name="category"
                     id="category"
-                    className="h-10 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  >
+                    className="h-10 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                     <option value="rent">For rent</option>
                     <option value="sale">For sale</option>
                   </select>
@@ -152,15 +148,13 @@ export default function OfferNew() {
                     id="description"
                     name="description"
                     required
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                  ></textarea>
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                 </div>
               </div>
               <div className="p-2 w-full">
                 <button
                   disabled={formProcessing}
-                  className="disabled:opacity-50 flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-                >
+                  className="disabled:opacity-50 flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                   {formProcessing ? 'Please wait...' : 'Submit offer'}
                 </button>
                 {error && (

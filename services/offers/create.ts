@@ -17,6 +17,7 @@ const create = async (payload: IOffer, userId: string) => {
     {
       fields: {
         ...payload,
+        users: [userId],
         price: Number(payload.price),
         status: 'inactive'
       }

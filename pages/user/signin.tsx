@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import BaseLayout from 'components/BaseLayout';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function SignIn() {
   const loginForm = useRef<HTMLFormElement>(null);
@@ -75,6 +76,7 @@ export default function SignIn() {
                 >
                   {formProcessing ? 'Please wait...' : 'Login'}
                 </button>
+
                 {error && (
                   <div className="flex justify-center w-full my-5">
                     <span className="bg-red-600 w-full rounded text-white px-3 py-3 text-center">
@@ -82,6 +84,17 @@ export default function SignIn() {
                     </span>
                   </div>
                 )}
+              </div>
+              <div className="p-2 w-full">
+                <p className="text-center">
+                  Don't have an account?{' '}
+                  <Link
+                    href="/user/register"
+                    className="text-indigo-500 inline-flex items-center mt-4"
+                  >
+                    Sign Up
+                  </Link>
+                </p>
               </div>
             </form>
           </div>

@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import BaseLayout from 'components/BaseLayout';
 import { useRouter } from 'next/router';
 
-export default function OfferNew() {
+export default function UserNew() {
   const userForm = useRef<HTMLFormElement>(null);
   const [error, setError] = useState('');
   const [formProcessing, setFormProcessing] = useState(false);

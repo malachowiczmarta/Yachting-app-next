@@ -10,6 +10,6 @@ const envVariableValidator = (variable: string | undefined, expectedVariableName
 export const config = {
   AIRTABLE_API_KEY: envVariableValidator(process.env.AIRTABLE_API_KEY, 'API_KEY'),
   AIRTABLE_BASE: envVariableValidator(process.env.AIRTABLE_BASE, 'AIRTABLE_BASE'),
-
-  NODE_ENVIRONMENT: envVariableValidator(process.env.AIRTABLE_BASE, 'NODE_ENV')
+  NODE_ENVIRONMENT: envVariableValidator(process.env.NODE_ENV, 'NODE_ENV'),
+  NEXTAUTH_SECRET: envVariableValidator(process.env.NEXTAUTH_SECRET, 'NEXTAUTH_SECRET')
 };

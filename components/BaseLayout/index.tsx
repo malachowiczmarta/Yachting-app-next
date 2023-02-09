@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
 import classNames from 'classnames';
@@ -10,7 +10,6 @@ interface BaseLayoutProps {
 const TopNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
-  console.log(`session`, session);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -49,12 +48,12 @@ const TopNavigation = () => {
           </Link>
         </div>
         {session && (
-          <a
+          <button
             // onClick={signOut}
             className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
           >
             <span>Logout</span>
-          </a>
+          </button>
         )}
 
         {!session && status !== 'loading' && (

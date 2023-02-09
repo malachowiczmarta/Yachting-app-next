@@ -1,8 +1,11 @@
+import { config } from '@/config';
+import { UserRole } from '@/types/user';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import authorizeUser from 'services/users/authorize';
 
 export default NextAuth({
+  secret: config.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -47,8 +50,8 @@ export default NextAuth({
     },
 
     async session({ session, token }) {
-      session.user.role = token.role;
-      session.user.id = token?.id;
+      session.user.role = token.role as UserRole;
+      session.user.id = token?.id as string;
 
       return session;
     }

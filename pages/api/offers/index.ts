@@ -1,5 +1,7 @@
 import getRecentOffers from 'services/offers/getRecent';
 import createOffer from 'services/offers/create';
+import { getSession } from 'next-auth/react';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface Req {
   method: string;
@@ -10,7 +12,7 @@ interface Res {
   json: (data: any) => any;
 }
 
-export default async (req: Req, res: Res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET': {
       const offers = await getRecentOffers(4);
@@ -20,22 +22,21 @@ export default async (req: Req, res: Res) => {
     }
     case 'POST': {
       try {
-        // const session = await getSession({ req });
-        // if (!session) {
-        //   return res.status(401).json({ error: 'not_authorized' });
-        // }
+        const session = await getSession({ req });
+        if (!session) {
+          return res.status(401).json({ error: 'not_authorized' });
+        }
 
         const payload = req.body;
-        // const userId = session.user.id;
-        const userId = '123';
+        const userId = session.user.id;
         const offer = await createOffer(payload, userId);
         res.status(200).json({ status: 'created', offer });
       } catch (error) {
         res.status(422).json({ status: 'not_created', error });
       }
-
       break;
     }
+
     default:
       res.status(400);
   }

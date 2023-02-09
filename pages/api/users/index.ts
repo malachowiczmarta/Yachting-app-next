@@ -1,6 +1,7 @@
 import createUser from 'services/users/create';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST': {
       try {
@@ -9,7 +10,7 @@ export default async (req, res) => {
 
         res.status(200).json({ status: 'created', user });
       } catch (error) {
-        res.status(422).json({ status: 'not_created', error: error.message });
+        res.status(422).json({ status: 'not_created', error: (error as Error).message });
       }
       break;
     }

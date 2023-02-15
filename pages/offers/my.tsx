@@ -20,7 +20,6 @@ export const getServerSideProps = async (ctx: GetSessionParams) => {
     };
   }
 
-  console.log('session', session);
   const offers = await getForUser(session?.user?.email);
 
   return {

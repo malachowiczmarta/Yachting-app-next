@@ -1,11 +1,10 @@
 import airDB from 'services/airtableClient';
 
 const getForUser = async (email: string) => {
-  console.log('getForUser', email);
   const offers = await airDB('offers')
     .select({
-      filterByFormula: `userEmail="${email}"`
-      // sort: [{ field: 'id', direction: 'desc' }],
+      filterByFormula: `userEmail="${email}"`,
+      sort: [{ field: 'id', direction: 'desc' }]
     })
     .firstPage();
 

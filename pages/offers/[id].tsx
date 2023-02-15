@@ -1,8 +1,11 @@
 import BaseLayout from 'components/BaseLayout';
 import getRecentOffers from 'services/offers/getRecent';
 import getOffer from 'services/offers/get';
+import isAuthorized from 'services/offers/isAuthorized';
 import { useRouter } from 'next/router';
-import { IOffer } from '..';
+import { IOffer } from '.';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 interface IParams {
   id: string;
@@ -34,6 +37,7 @@ interface OfferPageProps {
 
 export default function OfferPage({ offer }: OfferPageProps) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   if (router.isFallback) {
     return (
@@ -90,6 +94,11 @@ export default function OfferPage({ offer }: OfferPageProps) {
               className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
               src="https://dummyimage.com/400x400"
             />
+            {isAuthorized(offer, session) && (
+              <p>
+                <Link href={`/offers/${offer.id}/edit`}>Edit this offer</Link>
+              </p>
+            )}
           </div>
         </div>
       </section>

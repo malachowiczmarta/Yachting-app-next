@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import getForUser from 'services/offers/getForUser';
 import { getSession, GetSessionParams } from 'next-auth/react';
-import { IOffer } from '..';
+import { IOffer } from '.';
 
 interface IMyProps {
   offers: IOffer[];
@@ -19,7 +19,9 @@ export const getServerSideProps = async (ctx: GetSessionParams) => {
       }
     };
   }
-  const offers = await getForUser(session.user.email);
+
+  console.log('session', session);
+  const offers = await getForUser(session?.user?.email);
 
   return {
     props: {

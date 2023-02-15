@@ -41,15 +41,36 @@ const TopNavigation = () => {
       >
         <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
           <Link
-            href="/offers/new"
+            href="/offers"
             className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
           >
-            <span>Submit offer</span>
+            <span>All offers</span>
           </Link>
         </div>
         {session && (
+          <Link
+            href="/offers/my"
+            className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+          >
+            <span>My offers</span>
+          </Link>
+        )}
+        {/* {session && session.user.role === 'admin' && (
+          <Link href="/admin/offers" className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white">
+            <span>Admin</span>
+          </Link>
+        )} */}
+
+        <Link
+          href="/offers/new"
+          className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+        >
+          <span>Submit offer</span>
+        </Link>
+
+        {session && (
           <button
-            // onClick={signOut}
+            onClick={() => signOut()}
             className="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
           >
             <span>Logout</span>

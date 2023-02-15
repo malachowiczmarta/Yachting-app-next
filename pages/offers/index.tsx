@@ -18,6 +18,7 @@ export interface IOffer {
   location: string;
   fields?: string;
   status: string;
+  users: string[];
 }
 
 interface HomeProps {
@@ -36,7 +37,7 @@ export const getStaticProps = async () => {
   };
 };
 
-function Home({ offers, offset }: HomeProps) {
+function Offers({ offers, offset }: HomeProps) {
   const { query } = useRouter();
   const [currentOffers, setOffers] = useState(offers);
   const [currentOffset, setOffset] = useState(offset);
@@ -122,4 +123,4 @@ function Home({ offers, offset }: HomeProps) {
   );
 }
 
-export default Home;
+export default Offers;

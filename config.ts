@@ -11,5 +11,7 @@ export const config = {
   AIRTABLE_API_KEY: envVariableValidator(process.env.AIRTABLE_API_KEY, 'API_KEY'),
   AIRTABLE_BASE: envVariableValidator(process.env.AIRTABLE_BASE, 'AIRTABLE_BASE'),
   NODE_ENVIRONMENT: envVariableValidator(process.env.NODE_ENV, 'NODE_ENV'),
-  NEXTAUTH_SECRET: envVariableValidator(process.env.NEXTAUTH_SECRET, 'NEXTAUTH_SECRET')
+  NEXTAUTH_SECRET: envVariableValidator(process.env.NEXTAUTH_SECRET, 'NEXTAUTH_SECRET'),
+  STRIPE_SECRET_KEY: envVariableValidator(process.env.STRIPE_SECRET_KEY, 'STRIPE_SECRET_KEY'),
+  NEXT_PUBLIC_STRIPE: envVariableValidator(process.env.NEXT_PUBLIC_STRIPE, 'NEXT_PUBLIC_STRIPE')
 };

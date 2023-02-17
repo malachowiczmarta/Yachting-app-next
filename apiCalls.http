@@ -20,3 +20,36 @@ content-type: application/json
   "password": "12312321",
   "fullName": "John Doe"
 }
+
+###
+GET http://localhost:3000/api/offers/paginate
+###
+GET http://localhost:3000/api/admin/offers/paginate
+###
+GET http://localhost:3000/api/products
+
+###
+POST http://localhost:3000/api/checkout
+content-type: application/json
+
+{
+  "id": "recGgpQUch2GSYJhX",
+  "offerId": 29,
+  "quantity": 1
+}
+###
+POST http://localhost:3000/api/users/resetPassword
+content-type: application/json
+
+{
+  "email": "chmarus@gmail.com"
+}
+
+###
+PUT http://localhost:3000/api/users/resetPassword
+content-type: application/json
+
+{
+  "resetToken": "547ffc40564137ab1b81f8a35b0dc6c9ae94c8000765",
+  "password": "12qwaszx"
+}

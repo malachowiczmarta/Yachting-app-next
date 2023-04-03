@@ -6,14 +6,14 @@ import { jsonFetcher } from 'utils';
 import { useRouter } from 'next/router';
 import BaseLayout from '@/components/BaseLayout';
 import { OfferResponse } from '@/types/offer';
+import getFeatured from '@/services/offers/getFeatured';
 
 export const getStaticProps = async () => {
-  const offers = await paginateOffers();
+  const offers = await getFeatured(4);
 
   return {
     props: {
-      offset: offers.offset,
-      offers: offers.records.map((offer: OfferResponse) => offer.fields)
+      offers
     }
   };
 };
@@ -27,8 +27,7 @@ function Home() {
           <div>
             <Link
               className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              href="/offers"
-            >
+              href="/offers">
               See all offers
             </Link>
           </div>

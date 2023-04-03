@@ -5,6 +5,7 @@ import { config } from '@/config';
 
 export const finalize = async (offerId: string) => {
   let offer = await getOfferById(offerId);
+
   const stripe = new Stripe(config.STRIPE_SECRET_KEY, {
     apiVersion: '2022-11-15'
   });

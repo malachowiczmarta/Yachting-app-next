@@ -33,7 +33,7 @@ POST http://localhost:3000/api/checkout
 content-type: application/json
 
 {
-  "id": "recGgpQUch2GSYJhX",
+  "id": "recBpQOilZVOI055z",
   "offerId": 29,
   "quantity": 1
 }

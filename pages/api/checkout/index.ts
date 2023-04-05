@@ -6,6 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST': {
       try {
         const orderItem = req.body;
+        console.log('orderItem', orderItem);
         const checkout = await createCheckout(orderItem);
 
         res.status(200).json({ status: 'created', checkout });

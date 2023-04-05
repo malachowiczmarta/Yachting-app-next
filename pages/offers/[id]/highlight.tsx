@@ -105,7 +105,8 @@ export default function OfferHighlight({ offer, products }: IOfferHighlightProps
                   <select
                     name="productId"
                     id="productId"
-                    className="h-10 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    className="h-10 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  >
                     {products &&
                       products.length > 0 &&
                       products?.map((product) => (
@@ -124,7 +125,8 @@ export default function OfferHighlight({ offer, products }: IOfferHighlightProps
               <div className="p-2 w-full">
                 <button
                   disabled={formProcessing}
-                  className="disabled:opacity-50 flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                  className="disabled:opacity-50 flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                >
                   {formProcessing ? 'Please wait...' : 'Promote this offer'}
                 </button>
                 {error && (

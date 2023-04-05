@@ -103,9 +103,12 @@ export default function OfferPage({ offer }: OfferPageProps) {
               </div>
             )} */}
             {isAuthorized(offer, session) && (
-              <p>
-                <Link href={`/offers/${offer.id}/edit`}>Edit this offer</Link>
-              </p>
+              <div>
+                <Link className="mr-3" href={`/offers/${offer.id}/highlight`}>
+                  Highlight
+                </Link>
+                <Link href={`/offers/${offer.id}/edit`}>Edit</Link>
+              </div>
             )}
           </div>
         </div>

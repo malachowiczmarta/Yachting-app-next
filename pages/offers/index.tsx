@@ -19,6 +19,7 @@ export interface IOffer {
   fields?: string;
   status: string;
   users: string[];
+  imageUrl: string;
 }
 
 interface HomeProps {
@@ -82,6 +83,7 @@ function Offers({ offers, offset }: HomeProps) {
             </Link>
           </div>
           <div className="flex flex-wrap -m-4">
+            {/* TO DO wydzielic do komponentu */}
             {currentOffers.map((offer) => (
               <div key={offer.id} className="xl:w-1/4 md:w-1/2 p-4 cursor-pointer">
                 <Link href={`/offers/${offer.id}`}>

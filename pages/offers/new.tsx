@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import BaseLayout from 'components/BaseLayout';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
+import { uploadImage } from '@/utils';
 
 export default function OfferNew() {
   const offerForm = useRef<HTMLFormElement>(null);
@@ -9,6 +10,14 @@ export default function OfferNew() {
   const [formProcessing, setFormProcessing] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+
+  const handleImagePreview = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    if (!target.files?.length) return;
+    const url = window.URL.createObjectURL(target.files[0]);
+    setImagePreviewUrl(url);
+  };
 
   useEffect(() => {
     if (!session && status !== 'loading') {
@@ -28,9 +37,18 @@ export default function OfferNew() {
       mobile: form.get('phone'),
       price: form.get('price'),
       description: form.get('description'),
-      location: form.get('location')
+      location: form.get('location'),
+      imageUrl: ''
     };
 
+    if (form.get('picture')) {
+      const file = await uploadImage(form.get('picture') as File);
+      console.log('file', file);
+
+      payload.imageUrl = file.secure_url;
+    }
+
+    setFormProcessing(false);
     const response = await fetch('/api/offers', {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -39,11 +57,9 @@ export default function OfferNew() {
       }
     });
 
-    try {
-      if (response.ok) {
-        router.push('/offers/thanks');
-      }
-    } catch {
+    if (response.ok) {
+      router.push('/offers/thanks');
+    } else {
       const payload = await response.json();
       setFormProcessing(false);
       setError(payload.error?.details[0]?.message);
@@ -150,6 +166,26 @@ export default function OfferNew() {
                     required
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
                   ></textarea>
+                </div>
+              </div>
+              {imagePreviewUrl && (
+                <div className="p-2 w-full">
+                  <img src={imagePreviewUrl} className="rounded" />
+                </div>
+              )}
+              <div className="p-2 w-full">
+                <div className="relative">
+                  <label htmlFor="picture" className="leading-7 text-sm text-gray-600">
+                    Picture
+                  </label>
+                  <input
+                    type="file"
+                    onChange={handleImagePreview}
+                    id="picture"
+                    name="picture"
+                    required
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  />
                 </div>
               </div>
               <div className="p-2 w-full">

@@ -1,6 +1,6 @@
 import airDB from 'services/airtableClient';
 import Joi from 'joi';
-import { IOffer } from '@/pages';
+import { IOffer } from '@/pages/offers';
 
 const schema = Joi.object({
   title: Joi.string().required(),

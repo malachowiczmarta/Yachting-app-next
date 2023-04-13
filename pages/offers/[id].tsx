@@ -7,6 +7,7 @@ import { IOffer } from '.';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import noImage from '@/public/noimg.png';
 
 interface IParams {
   id: string;
@@ -54,6 +55,15 @@ export default function OfferPage({ offer }: OfferPageProps) {
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
+            <div className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center">
+              <Image
+                alt={`Preview photo of ${offer.title}`}
+                src={offer.imageUrl ?? noImage}
+                width={450}
+                height={300}
+                className="rounded"
+              />
+            </div>
             <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">{offer.category}</h2>
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">{offer.title}</h1>
@@ -94,19 +104,8 @@ export default function OfferPage({ offer }: OfferPageProps) {
                 </button>
               </div>
             </div>
-            {/* {offer?.imageUrl && (
-              <div className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center">
-                <Image
-                  alt={`Preview photo of ${offer.title}`}
-                  src={offer.imageUrl}
-                  width={600}
-                  height={450}
-                  className="rounded"
-                />
-              </div>
-            )} */}
             {isAuthorized(offer, session) && (
-              <div>
+              <div className="ml-auto">
                 <Link className="mr-3" href={`/offers/${offer.id}/highlight`}>
                   Highlight
                 </Link>

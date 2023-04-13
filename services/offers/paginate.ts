@@ -4,7 +4,7 @@ type offset = string | string[] | undefined;
 type category = string | string[] | undefined;
 
 const paginateOffers = async (offset?: offset, category?: category) => {
-  let apiUrl = `https://api.airtable.com/v0/${config.AIRTABLE_BASE}/offers?pageSize=2&view=onlyActive`;
+  let apiUrl = `https://api.airtable.com/v0/${config.AIRTABLE_BASE}/offers?pageSize=4&view=onlyActive`;
   if (offset) {
     apiUrl += `&offset=${offset}`;
   }

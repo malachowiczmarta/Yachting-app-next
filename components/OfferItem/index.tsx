@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { IOffer } from '@/pages/offers';
-
-// const NO_IMAGE = '/noimg.png';
+import noImage from '@/public/noimg.png';
 
 interface IOfferItemProps {
   offer: IOffer & { imageUrl?: string };
@@ -13,13 +12,13 @@ const OfferItem = ({ offer }: IOfferItemProps) => {
     <div className="xl:w-1/4 md:w-1/2 p-4 cursor-pointer">
       <Link href={`/offers/${offer.id}`}>
         <div className="bg-gray-100 p-6 rounded-lg">
-          {/* <Image
+          <Image
             className="h-40 rounded w-full object-cover object-center mb-6"
-            src={offer.imageUrl ?? NO_IMAGE}
+            src={offer.imageUrl ?? noImage}
             width={290}
             height={170}
             alt="content"
-          /> */}
+          />
           <h2 className="tracking-widest text-indigo-900 text-xs font-medium title-font">
             {offer.category}
           </h2>

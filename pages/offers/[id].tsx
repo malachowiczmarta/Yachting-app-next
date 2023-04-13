@@ -3,11 +3,12 @@ import getRecentOffers from 'services/offers/getRecent';
 import getOffer from 'services/offers/get';
 import isAuthorized from 'services/offers/isAuthorized';
 import { useRouter } from 'next/router';
-import { IOffer } from '.';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import noImage from '@/public/noimg.png';
+import { useEffect, useState } from 'react';
+import { IOffer } from '@/types/offer';
 
 interface IParams {
   id: string;
@@ -42,6 +43,11 @@ interface OfferPageProps {
 export default function OfferPage({ offer }: OfferPageProps) {
   const router = useRouter();
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    console.log('page visit');
+  }, []);
+
   if (router.isFallback) {
     return (
       <BaseLayout>
@@ -104,14 +110,19 @@ export default function OfferPage({ offer }: OfferPageProps) {
                 </button>
               </div>
             </div>
-            {isAuthorized(offer, session) && (
-              <div className="ml-auto">
-                <Link className="mr-3" href={`/offers/${offer.id}/highlight`}>
-                  Highlight
-                </Link>
-                <Link href={`/offers/${offer.id}/edit`}>Edit</Link>
-              </div>
-            )}
+
+            <div className="flex justify-between gap-2 flex-wrap w-full mt-2">
+              <p>Page views {offer.viewsCount}</p>
+
+              {isAuthorized(offer, session) && (
+                <div>
+                  <Link className="mr-3" href={`/offers/${offer.id}/highlight`}>
+                    Highlight
+                  </Link>
+                  <Link href={`/offers/${offer.id}/edit`}>Edit</Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

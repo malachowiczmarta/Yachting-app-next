@@ -5,23 +5,8 @@ import paginateOffers from 'services/offers/paginate';
 import { jsonFetcher } from 'utils';
 import { useRouter } from 'next/router';
 import BaseLayout from '@/components/BaseLayout';
-import { OfferResponse } from '@/types/offer';
+import { IOffer, OfferResponse } from '@/types/offer';
 import OfferItem from '@/components/OfferItem';
-
-export interface IOffer {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  mobile: string;
-  email: string;
-  price: number;
-  location: string;
-  fields?: string;
-  status: string;
-  users: string[];
-  imageUrl: string;
-}
 
 interface HomeProps {
   offers: IOffer[];

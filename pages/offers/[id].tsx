@@ -70,9 +70,6 @@ export default function OfferPage({ offer }: OfferPageProps) {
               <Image
                 alt={`Preview photo of ${offer.title}`}
                 src={offer.imageUrl ?? noImage}
-                // fill
-                // width={450}
-                // height={300}
                 className="rounded mx-auto"
               />
             </div>

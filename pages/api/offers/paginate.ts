@@ -1,6 +1,6 @@
 import paginateOffers from 'services/offers/paginate';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { IOffer } from '@/pages/offers';
+import { IOffer } from '@/types/offer';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

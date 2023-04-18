@@ -11,8 +11,24 @@ const schema = Joi.object({
   imageUrl: Joi.string()
 });
 
+const schemaViews = Joi.object({
+  viewsCount: Joi.number().greater(0).required()
+});
+
 const updateOffer = async (airtableId: string, payload: any) => {
   const validatedOffer = await schema.validateAsync(payload);
+  const offer = await airDB('offers').update([
+    {
+      id: airtableId,
+      fields: { ...validatedOffer }
+    }
+  ]);
+
+  return offer;
+};
+
+export const updateViews = async (airtableId: string, payload: any) => {
+  const validatedOffer = await schemaViews.validateAsync(payload);
   const offer = await airDB('offers').update([
     {
       id: airtableId,

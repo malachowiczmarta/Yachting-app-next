@@ -1,4 +1,4 @@
-import { IOffer } from '@/pages/offers';
+import { IOffer } from '@/types/offer';
 import { Session } from 'next-auth';
 
 const isAuthorized = (offer: IOffer, session: Session | null) => {

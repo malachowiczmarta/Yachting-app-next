@@ -1,8 +1,8 @@
 import BaseLayout from 'components/BaseLayout';
 import getForUser from 'services/offers/getForUser';
 import { getSession, GetSessionParams } from 'next-auth/react';
-import { IOffer } from '.';
 import OfferItem from '@/components/OfferItem';
+import { IOffer } from '@/types/offer';
 
 interface IMyProps {
   offers: IOffer[];

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import noImage from '@/public/noimg.png';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { IOffer } from '@/types/offer';
 
 interface IParams {
@@ -44,8 +44,13 @@ export default function OfferPage({ offer }: OfferPageProps) {
   const router = useRouter();
   const { data: session, status } = useSession();
 
+  const pageViewsCount = async (id: string) => {
+    const response = await fetch(`/api/offers/${id}/viewsCount`, { method: 'PUT' });
+  };
+
   useEffect(() => {
     console.log('page visit');
+    pageViewsCount(offer.id);
   }, []);
 
   if (router.isFallback) {
@@ -60,17 +65,18 @@ export default function OfferPage({ offer }: OfferPageProps) {
     <BaseLayout>
       <section className="text-gray-600 body-font overflow-hidden">
         <div className="container px-5 py-24 mx-auto">
-          <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <div className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center">
+          <div className="lg:w-4/5 mx-auto flex flex-wrap flex-row gap-4">
+            <div className="flex-1 min-w-280 xsm:min-w-400  md:min-w-500 object-cover object-center">
               <Image
                 alt={`Preview photo of ${offer.title}`}
                 src={offer.imageUrl ?? noImage}
-                width={450}
-                height={300}
-                className="rounded"
+                // fill
+                // width={450}
+                // height={300}
+                className="rounded mx-auto"
               />
             </div>
-            <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
+            <div className="flex-1 lg:pr-10 lg:py-6 mb-6 lg:mb-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">{offer.category}</h2>
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">{offer.title}</h1>
               <div className="flex mb-4">
@@ -110,19 +116,20 @@ export default function OfferPage({ offer }: OfferPageProps) {
                 </button>
               </div>
             </div>
+          </div>
+          <div className="lg:w-4/5 mx-auto flex justify-between gap-2 flex-wrap w-full mt-2">
+            <p>Page views {offer.viewsCount}</p>
 
-            <div className="flex justify-between gap-2 flex-wrap w-full mt-2">
-              <p>Page views {offer.viewsCount}</p>
-
-              {isAuthorized(offer, session) && (
-                <div>
-                  <Link className="mr-3" href={`/offers/${offer.id}/highlight`}>
-                    Highlight
-                  </Link>
-                  <Link href={`/offers/${offer.id}/edit`}>Edit</Link>
-                </div>
-              )}
-            </div>
+            {isAuthorized(offer, session) && (
+              <div>
+                <Link className="mr-3 text-indigo-400" href={`/offers/${offer.id}/highlight`}>
+                  Highlight
+                </Link>
+                <Link className="text-indigo-400" href={`/offers/${offer.id}/edit`}>
+                  Edit
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>

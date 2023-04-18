@@ -5,8 +5,8 @@ import { getSession } from 'next-auth/react';
 import getOfferById from 'services/offers/get';
 import isAuthorized from 'services/offers/isAuthorized';
 import { NextApiRequest } from 'next';
-import { IOffer } from '..';
 import { uploadImage } from '@/utils';
+import { IOffer } from '@/types/offer';
 
 interface IProps {
   req: NextApiRequest;
@@ -71,7 +71,6 @@ export default function OfferEdit({ offer }: IEditProps) {
 
       payload.imageUrl = file.secure_url;
     }
-    console.log('payload', payload);
     const response = await fetch(`/api/offers/${offer.id}`, {
       method: 'PUT',
       body: JSON.stringify(payload),

@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react';
 import isAuthorized from 'services/offers/isAuthorized';
 import finalizeCheckout from 'services/checkout/finalize';
 import { NextApiRequest } from 'next';
-import { IOffer } from '..';
+import { IOffer } from '@/types/offer';
 
 interface IProps {
   req: NextApiRequest;

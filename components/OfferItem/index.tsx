@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { IOffer } from '@/pages/offers';
 import noImage from '@/public/noimg.png';
+import { IOffer } from '@/types/offer';
 
 interface IOfferItemProps {
   offer: IOffer & { imageUrl?: string };

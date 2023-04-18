@@ -6,7 +6,7 @@ import { jsonFetcher } from 'utils';
 import classNames from 'classnames';
 import { getSession } from 'next-auth/react';
 import { NextApiRequest } from 'next';
-import { IOffer } from '../offers';
+import { IOffer } from '@/types/offer';
 
 interface IProps {
   req: NextApiRequest;

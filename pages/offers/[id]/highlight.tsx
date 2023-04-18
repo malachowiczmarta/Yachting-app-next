@@ -6,8 +6,8 @@ import isAuthorized from 'services/offers/isAuthorized';
 import getAllProducts from 'services/products/getAll';
 import { loadStripe } from '@stripe/stripe-js';
 import { NextApiRequest } from 'next';
-import { IOffer } from '..';
 import { config } from '@/config';
+import { IOffer } from '@/types/offer';
 
 interface IProps {
   req: NextApiRequest;

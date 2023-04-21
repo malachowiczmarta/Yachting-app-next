@@ -176,8 +176,10 @@ const Footer = () => (
 export default function BaseLayout({ children }: BaseLayoutProps) {
   return (
     <div className="flex flex-col justify-between min-h-screen">
-      <TopNavigation />
-      {children}
+      <div>
+        <TopNavigation />
+        {children}
+      </div>
       <Footer />
     </div>
   );

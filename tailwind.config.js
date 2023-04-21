@@ -7,15 +7,14 @@ module.exports = {
       400: '400px',
       280: '280px'
     },
-    screens: {
-      xsm: '425px',
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      '2xl': '1536px'
-    },
-    extend: {}
+    extend: {
+      backgroundImage: {
+        'main-background': "url('/public/background.webp')"
+      },
+      screens: {
+        xsm: '425px'
+      }
+    }
   },
   variants: {
     extend: {

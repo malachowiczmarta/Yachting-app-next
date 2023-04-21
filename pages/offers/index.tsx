@@ -53,7 +53,7 @@ function Offers({ offers, offset }: HomeProps) {
     <BaseLayout>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex justify-around w-full mb-4">
+          <div className="flex justify-center gap-2 w-full mb-4">
             <Link href="/offers">
               <button className={query.category ? 'btn-secondary' : 'btn-primary'}>All</button>
             </Link>

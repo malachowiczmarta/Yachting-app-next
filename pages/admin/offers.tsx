@@ -172,7 +172,7 @@ export default function airtableIdHome({ offers, offset }: { offers: IOffer[]; o
             <div className="mx-4 mb-4">
               {currentOffset && (
                 <button
-                  className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                  className="flex mx-auto text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-600 rounded text-lg"
                   onClick={loadMore}
                 >
                   Load more

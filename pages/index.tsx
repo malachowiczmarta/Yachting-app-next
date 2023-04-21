@@ -21,13 +21,13 @@ function Home() {
         <div className="absolute inset-0 z-[-1]">
           <Image src={yachtBg} priority alt="background image" fill />
         </div>
-        <div className="container px-5 pt-20 lg:pt-32 pb-64 mx-auto ">
+        <div className="container px-5 pt-16 lg:pt-28 pb-60 lg:pb-72 mx-auto ">
           <div>
-            <h1 className="text-5xl lg:text-7xl text-white bold lg:w-5/6">
+            <h1 className="text-4xl lg:text-6xl text-white bold w-full lg:w-5/6">
               Set sail for success with our yacht rental and sales platform.
             </h1>
             <Link
-              className="inline-block mt-10 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              className="inline-block mt-10 text-white bg-teal-500 border-0 py-2 px-8 focus:outline-none hover:bg-teal-400 rounded text-lg"
               href="/offers"
             >
               See all offers

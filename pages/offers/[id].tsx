@@ -77,7 +77,7 @@ export default function OfferPage({ offer }: OfferPageProps) {
               <h2 className="text-sm title-font text-gray-500 tracking-widest">{offer.category}</h2>
               <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">{offer.title}</h1>
               <div className="flex mb-4">
-                <p className="flex-grow text-indigo-900 border-b-2 border-indigo-500 py-2 text-lg px-1">
+                <p className="flex-grow text-teal-900 border-b-2 border-teal-500 py-2 text-lg px-1">
                   Description
                 </p>
               </div>
@@ -119,10 +119,10 @@ export default function OfferPage({ offer }: OfferPageProps) {
 
             {isAuthorized(offer, session) && (
               <div>
-                <Link className="mr-3 text-indigo-400" href={`/offers/${offer.id}/highlight`}>
+                <Link className="mr-3 text-teal-400" href={`/offers/${offer.id}/highlight`}>
                   Highlight
                 </Link>
-                <Link className="text-indigo-400" href={`/offers/${offer.id}/edit`}>
+                <Link className="text-teal-400" href={`/offers/${offer.id}/edit`}>
                   Edit
                 </Link>
               </div>
